@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include="template :: head"></head>
+<body>
+<div th:fragment="reloadModel">
+    <div th:text="${model.date}"></div>
+    <div th:text="${#dates.format(model.date, 'dd - MM - yyyy')}"></div>
+</div>
+
+
+<div th:fragment="displayText(text)">
+    <div th:text="${text}"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include="template :: head"></head>
+<body>
+<div class="container">
+    <header th:include="template :: header">
+    </header>
+
+    <div id="content">
+        <div class="row">
+            <div class="col-md-8  ">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-6"> Contacts</div>
+                            <div class="col-xs-6 text-right">
+
+                                <a th:href="@{/index/new}" class="btn btn-sm btn-success">+</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Number</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr th:each="contact : ${contactList}">
+                                <td th:text="${contact.id}">
+
+                                </td>
+                                <td th:text="${contact.name}">
+
+                                </td>
+                                <td th:text="${contact.number}">
+
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-info" th:text="Edit" th:href="@{'/index/'+${contact.id}}"/>
+                                    <a class="btn btn-sm btn-info" th:text="Remove"
+                                       th:href="@{'/index/delete/'+${contact.id}}"/>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" th:if="${contact !=null}">
+
+                <form method="POST" th:action="@{/index/save}" th:object="${contact}" name="entityForm"
+                      id="aaaa_entityForm">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading"
+                             th:text="${contact.id !=null ? 'Edit '+contact.name : 'Create New'}"></div>
+                        <div class="panel-body">
+                            <input name="id" type="hidden" th:field="*{id}"></input>
+
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" name="name" id="name" th:field="*{name}"/>
+                                <span th:if="${#fields.hasErrors('name')}" th:errors="${contact.name}">Error name</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Number</label>
+                                <input type="text" class="form-control" name="number" id="number" th:field="*{number}"/>
+                                <span th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Error name</span>
+                            </div>
+                            <div class="form-group">
+                                <input class="btn btn-sm btn-info" value="Save" type="submit"/>
+                                <a class="btn btn-sm btn-info" href="/index/cancel">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer th:include="template :: footer">
+    </footer>
+</div>
+</body>
+</html>
+

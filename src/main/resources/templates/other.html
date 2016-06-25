@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include="template :: head"></head>
+<body>
+<div class="container">
+    <div id="content">
+        <div th:include="template :: header"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Description</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Expresion</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Resilt</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        List
+                    </div>
+                    <div class="col-md-6">
+                             <pre>
+&lt;<strong>uL</strong>&gt;
+    &lt;<strong>li </strong><strong>th</strong><strong>:each=</strong><strong>&quot;item : ${model.listOfObject}&quot; </strong><strong>th</strong><strong>:text=</strong><strong>&quot;${item}&quot;</strong>&gt;&lt;/<strong>li</strong>&gt;
+&lt;/<strong>uL</strong>&gt;
+                                </pre>
+                    </div>
+                    <div class="col-md-4">
+                        <uL>
+                            <li th:each="item : ${model.listOfObject}" th:text="${item}"></li>
+                        </uL>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        Date
+                    </div>
+                    <div class="col-md-6">
+                             <pre>
+&lt;<strong>div </strong><strong>th</strong><strong>:text=</strong><strong>&quot;${model.date}&quot;</strong>&gt;&lt;/<strong>div</strong>&gt;
+&lt;<strong>div </strong><strong>th</strong><strong>:text=</strong><strong>&quot;${#dates.format(model.date, &#39;dd - MM - yyyy&#39;)}&quot;</strong>&gt;&lt;/<strong>div</strong>&gt;
+                                </pre>
+                    </div>
+                    <div class="col-md-4">
+                        <div th:text="${model.date}"></div>
+                        <div th:text="${#dates.format(model.date, 'dd - MM - yyyy')}"></div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        Load fragment
+                    </div>
+                    <div class="col-md-6">
+                             <pre>
+&lt;<strong>div </strong><strong>id=</strong><strong>&quot;loadFragment&quot;</strong>&gt;&lt;/<strong>div</strong>&gt;
+&lt;<strong>div</strong>&gt;&lt;<strong>a </strong><strong>id=</strong><strong>&quot;reloadModel&quot; </strong><strong>class=</strong><strong>&quot;btn btn-info&quot;</strong>&gt;Reload&lt;/<strong>a</strong>&gt;&lt;/<strong>div</strong>&gt;
+                                </pre>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="loadFragment"></div>
+                        <div><a id="reloadModel" class="btn btn-info">Reload</a></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        Fragment
+                    </div>
+                    <div class="col-md-6">
+                        <label>Definition of fragment:</label>
+                            <pre>
+&lt;<strong>div </strong><strong>th</strong><strong>:fragment=</strong><strong>&quot;displayText(text)&quot;</strong>&gt;
+    &lt;<strong>div </strong><strong>th</strong><strong>:text=</strong><strong>&quot;${text}&quot;</strong>&gt;&lt;/<strong>div</strong>&gt;
+&lt;/<strong>div</strong>&gt;</pre>
+                        <label>Used in view:</label>
+                        <pre>
+&lt;<strong>div </strong><strong>th</strong><strong>:include=</strong><strong>&quot;fragment :: displayText(&#39;Example 1&#39;)&quot;</strong>&gt;&lt;/<strong>div</strong>&gt;
+&lt;<strong>div </strong><strong>th</strong><strong>:include=</strong><strong>&quot;fragment :: displayText(&#39;Example 2&#39;)&quot;</strong>&gt;&lt;/<strong>div</strong>&gt;
+&lt;<strong>div </strong><strong>th</strong><strong>:include=</strong><strong>&quot;fragment :: displayText(&#39;Example 3&#39;)&quot;</strong>&gt;&lt;/<strong>div</strong>&gt;
+                                </pre>
+                    </div>
+                    <div class="col-md-4">
+                        <div th:include="fragment :: displayText('Example 1')"></div>
+                        <div th:include="fragment :: displayText('Example 2')"></div>
+                        <div th:include="fragment :: displayText('Example 3')"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div th:include="template :: footer">
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

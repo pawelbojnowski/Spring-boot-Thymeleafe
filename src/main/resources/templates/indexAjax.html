@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include="template :: head"></head>
+<body>
+<div class="container">
+    <header th:include="template :: header">
+    </header>
+    <div id="content"  th:fragment="content">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-6"> Contacts</div>
+                            <div class="col-xs-6 text-right">
+                                <form>
+                                    <div id="createNew" class="btn btn-sm btn-success">+</div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+
+
+                        <table id="table" class="table" th:fragment="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Number</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="contact : ${contactList}">
+                                <td th:text="${contact.id}">
+
+                                </td>
+                                <td th:text="${contact.name}">
+
+                                </td>
+                                <td th:text="${contact.number}">
+
+                                </td>
+                                <td>
+                                    <a class="edit btn btn-sm btn-info" th:text="Edit"
+                                       th:attr="data-el_id=${contact.id}"/>
+                                    <a class="delete btn btn-sm btn-info" th:text="Remove"
+                                       th:attr="data-el_id=${contact.id}"/>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="editPane" >
+                    <div th:if="${contact}" class="panel panel-default" th:fragment="editPane">
+                        <div class="panel-heading" th:text="${contact.id !=null ? 'Edit '+contact.name : 'Create New'}"></div>
+                        <div class="panel-body" th:object="${contact}">
+
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" th:field="*{name}"/>
+                                <span class="error"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Number</label>
+                                <input type="text" class="form-control" th:field="*{number}"/>
+                                <span class="error"></span>
+                            </div>
+                            <div class="form-group">
+                                <input id="saveForm" class="btn btn-sm btn-info" value="Save" th:attr="data-el_id=*{id}"/>
+                                <input id="cancelForm" class="btn btn-sm btn-info" value="Cancel"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:include="template :: footer">
+    </footer>
+</div>
+</body>
+</html>
